@@ -1,17 +1,30 @@
-import React from "react";
+import React, {useContext} from "react";
+import { FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import {Context} from "../store/appContext";
+
+
 
 export const Navbar = () => {
+	const {store,actions}=useContext(Context);
 	return (
 		<nav className="navbar navbar-light bg-light mb-3">
-			<Link to="/">
-				<span className="navbar-brand mb-0 h1">React Boilerplate</span>
-			</Link>
-			<div className="ml-auto">
-				<Link to="/demo">
-					<button className="btn btn-primary">Check the Context in action</button>
-				</Link>
-			</div>
+			<button type="button" className="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+				Favorites {store.favorites.length}
+			</button>
+			<ul className="dropdown-menu dropdown-menu-end">
+				{store.favorites.map((favorite) =>
+				(
+					<li>
+						<span>{favorite.name}</span>
+						<FaTrash onClick={() => actions.toggleFavorite(
+							favorite.id,
+							favorite.type,
+							favorite.name
+						)} />
+					</li>
+				))}
+			</ul>
 		</nav>
 	);
 };
