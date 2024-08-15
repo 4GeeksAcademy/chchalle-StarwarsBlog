@@ -7,6 +7,9 @@ import { Demo } from "./views/demo";
 import { Single } from "./views/single";
 import injectContext from "./store/appContext";
 import { CharacterDetails } from "./views/CharacterDetails";
+import { PlanetDetails } from "./views/PlanetDetails.js";
+
+
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -25,6 +28,7 @@ const Layout = () => {
 					<Routes>
 						<Route path="/" element={<Home />} />
 						<Route path="/details/:characterID" element={<CharacterDetails/>}/>
+						<Route path="/planet-learnMore/:planetID" element={<PlanetDetails/>}/>
 					</Routes>
 					<Footer />
 				</ScrollToTop>

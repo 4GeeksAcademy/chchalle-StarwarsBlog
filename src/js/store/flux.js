@@ -1,7 +1,9 @@
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			characters: [],
+			planets: [],
 			favorites: []
 		},
 		actions: {
@@ -15,9 +17,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch((err) => console.error(err))
 
 			},
+			fetchPlanets: () => {
+				fetch('https://www.swapi.tech/api/planets/')
+					.then((res) => res.json())
+					.then((payload) => {
+						setStore({ planets: payload.results })
+					})
+					.catch((err) => console.error(err))
+
+			},
 			toggleFavorite: (id, type, name) => {
 				const store = getStore();
-				
+
 				let filteredFavorite = false;
 
 				const newFavorites = store.favorites.filter((favorite) => {
@@ -28,16 +39,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 					return true;
 				})
-			
+
 				if (!filteredFavorite) {
 					newFavorites.push({
 						id, type, name
 
 					})
-			
+
 				}
-				setStore({ ...store,favorites: newFavorites })
-				console.log("the store",store);
+				setStore({ ...store, favorites: newFavorites })
+				console.log("the store", store);
+			}
+			,
+			navigateFromFavorite: (name, navigate) => {
+				const store = getStore();
+				const favoriteOfName = store.favorites.find((favorite) =>  (favorite.name === name) )
+
+				const handleCharacterClick = (uid) => {
+					navigate(`/details/${uid}`);
+				};
+				const handlePlanetClick = (uid) => {
+					navigate(`/planet-learnMore/${uid}`);
+				};
+
+				if(favoriteOfName.type==="CHARACTER"){handleCharacterClick(favoriteOfName.id)}
+				if(favoriteOfName.type==="PLANET"){handlePlanetClick(favoriteOfName.id)}
+
+
 			}
 
 
