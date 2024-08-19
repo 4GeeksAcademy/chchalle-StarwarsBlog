@@ -23,7 +23,7 @@ export const Home = () => {
 	function NameIsFavorited(name) {
 
 		return !!store.favorites.find((favorite) => (favorite.name === name))
-		
+
 		// if (favoriteOfName.type === "CHARACTER") {
 		// 	if (favoriteOfName.length === 0) {
 		// 		return (<CiHeart onClick={() => actions.toggleFavorite(character.uid,
@@ -56,47 +56,71 @@ export const Home = () => {
 	}
 
 	return (
-		<div >
-			<p>home page</p>
+		<div className="flex-container">
+			<h2>home page</h2>
+			<h2>home page</h2>
 
-			<div style={{ display: 'flex', gap: '1rem' }}>
+			<div className="cardContainer">
 				{store.characters.map((character) => (
-					<div key={character.uid}>
+					<div key={character.uid} className="characterCard">
 						<div>
 							<a></a>
+							<div className="row">
+								<h3>{character.name}</h3>
+							</div>
+							<div className="row buttonRow">
+								<div className="col-2">
+									{NameIsFavorited(character.name) && (
+										<FaHeart onClick={() => actions.toggleFavorite(character.uid,
+											"CHARACTER",
+											character.name
+										)} />
 
-							<p>{character.name}</p>
-							{NameIsFavorited(character.name) && (
-								<FaHeart onClick={() => actions.toggleFavorite(character.uid,
-									"CHARACTER",
-									character.name
-								)} />
-
-							)}
-								{!NameIsFavorited(character.name) && (
-									<CiHeart onClick={() => actions.toggleFavorite(character.uid,
-										"CHARACTER",
-										character.name
-									)} />
-							)}
-						
-							<button type="button" className="btn" onClick={() => handleCharacterClick(character.uid)}>Learn More</button>
+									)}
+									{!NameIsFavorited(character.name) && (
+										<CiHeart onClick={() => actions.toggleFavorite(character.uid,
+											"CHARACTER",
+											character.name
+										)} />
+									)}
+								</div>
+								<div className="col-10">
+									<button type="button" className="btn" onClick={() => handleCharacterClick(character.uid)}>Learn More</button>
+								</div>
+							</div>
 						</div>
 					</div>
 				))}
 			</div>
-			<div style={{ display: 'flex', gap: '1rem' }}>
+			<div className="cardContainer">
 				{store.planets.map((planet) => (
-					<div key={planet.uid}>
+					<div key={planet.uid} className="characterCard">
 						<div>
 							<a></a>
+							<div className="row">
+								<h3>{planet.name}</h3>
+							</div>
+							<div className="row buttonRow">
+								<div className="col-2">
+									{NameIsFavorited(planet.name) && (
+										<FaHeart onClick={() => actions.toggleFavorite(planet.uid,
+											"PLANET",
+											planet.name
+										)} />
 
-							<p>{planet.name}</p>
-							<CiHeart onClick={() => actions.toggleFavorite(planet.uid,
-								"PLANET",
-								planet.name
-							)} />
-							<button type="button" className="btn" onClick={() => handlePlanetClick(planet.uid)}>Learn More</button>
+									)}
+									{!NameIsFavorited(planet.name) && (
+										<CiHeart onClick={() => actions.toggleFavorite(planet.uid,
+											"PLANET",
+											planet.name
+										)} />
+									)}
+								</div>
+								<div className="col-10">
+
+									<button type="button" className="btn" onClick={() => handlePlanetClick(planet.uid)}>Learn More</button>
+								</div>
+							</div>
 						</div>
 					</div>
 				))}

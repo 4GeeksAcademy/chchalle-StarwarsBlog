@@ -1,0 +1,24 @@
+.cardContainer {
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+}
+.characterCard{ 
+    min-width: 250px;
+    justify-content: flex-start;
+    padding-left: 15px;
+    padding-right:15px;
+    margin:15px;
+    background-color: lightcyan;
+    border: 1px solid grey;
+}
+.buttonRow{
+    flex-wrap: nowrap;
+}
+.navbar{
+    position:fixed;
+    right:0;
+    width: 100%;
+}
