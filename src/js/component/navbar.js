@@ -10,6 +10,7 @@ export const Navbar = () => {
     useEffect(() => {
         actions.fetchCharacters();
         actions.fetchPlanets();
+        actions.fetchStarShip();
     }, [actions]);
 
     return (

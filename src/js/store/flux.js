@@ -4,6 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			characters: [],
 			planets: [],
+			starships: [],
 			favorites: []
 		},
 		actions: {
@@ -22,6 +23,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then((res) => res.json())
 					.then((payload) => {
 						setStore({ planets: payload.results })
+					})
+					.catch((err) => console.error(err))
+
+			},
+			fetchStarShip: () => {
+				fetch('https://www.swapi.tech/api/starships/')
+					.then((res) => res.json())
+					.then((payload) => {
+						setStore({ starships: payload.results })
 					})
 					.catch((err) => console.error(err))
 
@@ -61,10 +71,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const handlePlanetClick = (uid) => {
 					navigate(`/planet-learnMore/${uid}`);
 				};
+				const handleStarShipClick = (uid) => {
+					navigate(`/starship-learnMore/${uid}`);
+				};
 
 				if(favoriteOfName.type==="CHARACTER"){handleCharacterClick(favoriteOfName.id)}
 				if(favoriteOfName.type==="PLANET"){handlePlanetClick(favoriteOfName.id)}
-
+				if(favoriteOfName.type==="STARSHIP"){handleStarShipClick(favoriteOfName.id)}
 
 			}
 

@@ -11,6 +11,7 @@ export const Home = () => {
 	useEffect(() => {
 		actions.fetchCharacters();
 		actions.fetchPlanets();
+		actions.fetchStarShip();
 	}, []);
 
 	const handleCharacterClick = (uid) => {
@@ -19,6 +20,10 @@ export const Home = () => {
 	const handlePlanetClick = (uid) => {
 		navigate(`/planet-learnMore/${uid}`);
 	};
+	const handleStarShipClick = (uid) => {
+		navigate(`/starship-learnMore/${uid}`);
+	};
+	
 
 	function NameIsFavorited(name) {
 
@@ -86,6 +91,38 @@ export const Home = () => {
 								</div>
 								<div className="col-10">
 									<button type="button" className="btn" onClick={() => handleCharacterClick(character.uid)}>Learn More</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				))}
+			</div>
+			<div className="cardContainer">
+				{store.starships.map((starship) => (
+					<div key={starship.uid} className="characterCard">
+						<div>
+							<a></a>
+							<div className="row">
+								<h3>{starship.name}</h3>
+							</div>
+							<div className="row buttonRow">
+								<div className="col-2">
+									{NameIsFavorited(starship.name) && (
+										<FaHeart onClick={() => actions.toggleFavorite(starship.uid,
+											"STARSHIP",
+											starship.name
+										)} />
+
+									)}
+									{!NameIsFavorited(starship.name) && (
+										<CiHeart onClick={() => actions.toggleFavorite(starship.uid,
+											"STARSHIP",
+											starship.name
+										)} />
+									)}
+								</div>
+								<div className="col-10">
+									<button type="button" className="btn" onClick={() => handleStarShipClick(starship.uid)}>Learn More</button>
 								</div>
 							</div>
 						</div>

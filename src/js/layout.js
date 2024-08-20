@@ -8,6 +8,7 @@ import { Single } from "./views/single";
 import injectContext from "./store/appContext";
 import { CharacterDetails } from "./views/CharacterDetails";
 import { PlanetDetails } from "./views/PlanetDetails.js";
+import {StarShipDetails} from "./views/StarShipDetails.js";
 
 
 
@@ -29,6 +30,8 @@ const Layout = () => {
 						<Route path="/" element={<Home />} />
 						<Route path="/details/:characterID" element={<CharacterDetails/>}/>
 						<Route path="/planet-learnMore/:planetID" element={<PlanetDetails/>}/>
+						<Route path="/StarShip-learnMore/:starshipID" element={<StarShipDetails/>}/>
+						
 					</Routes>
 					<Footer />
 				</ScrollToTop>
